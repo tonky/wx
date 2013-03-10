@@ -1,0 +1,35 @@
+Graph Traversal
+Given a undirected graph based on a set of nodes and links, write a program that shows all the possible paths from a source node to a destination node. It is up to you to decide what kind of structure you want to use to represent the nodes and links. A path may traverse any link at most once.
+
+Example:
+Let's say there are 4 nodes, named as 'a', 'b', 'c', 'd'.
+And there are 6 links that connect 'a & b', 'b & d', 'a & c',  'c & d',  'a & d', and 'b & c' so that it will form a graph like the following:
+   --- b ---
+  /     |      \
+a ------------ d
+ \      |      /
+   --- c ---
+
+If the source is 'a', and the destination is 'd', your program should return:
+
+a - d
+a - b - d
+a - c - d
+a - b - c - d
+a - c - b - d
+
+----------------------------------------------------------------------------------
+
+a
+
+a b
+a c
+a d !
+
+a b c
+a b d !
+a b a -
+
+a c b
+a c d !
+a c a -

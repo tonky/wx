@@ -1,0 +1,61 @@
+import unittest
+
+
+# link = (name, name)
+# graph = [link1, link2, ...]
+
+
+def connected(name, graph):
+    return [connection for connection in graph if name in connection]
+
+def path(start, end, graph):
+    seen = []
+    paths = []
+
+    links = connected(start, graph)
+    current_path = [links[0]]
+
+    def check_end(path, link):
+        current_path = path+link
+
+        if end in link:
+            paths.append(current_path)
+        else:
+            for link in connected(link[1], graph):
+                check_end(current_path, link)
+
+    for link in links:
+        check_end(link)
+
+#    for link in links:
+#        if link in current_path:
+#            continue
+#
+#        current_path.append(link)
+
+    return paths
+
+    
+
+class TestPath(unittest.TestCase):
+    def setUp(self):
+        self.ab = ("a", "b")
+        self.ac = ("c", "a")
+        self.bd = ("b", "d")
+        self.bc = ("c", "b")
+        self.cd = ("d", "c")
+
+    def test_connected_two_points(self):
+        self.assertEqual([self.ab], connected("a", [self.ab]))
+
+    def test_connected(self):
+        self.assertEqual([self.ab, self.ac], connected("a", [self.ab, self.ac, self.bc]))
+
+    def test_ab(self):
+        self.assertEqual([[self.ab]], path("a", "b", [self.ab]))
+
+    def test_ab_bc(self):
+        self.assertEqual([[self.ab, self.bc]], path("a", "c", [self.ab, self.bc]))
+
+if __name__ == '__main__':
+    unittest.main()
